@@ -4,6 +4,8 @@ import About from '@/components/About';
 import Tools from '@/components/Tools';
 import ServicesPreview from '@/components/ServicesPreview';
 import Testimonials from '@/components/Testimonials';
+import PortfolioSection from '@/components/PortfolioSection';
+import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 
@@ -18,6 +20,8 @@ const Index = () => {
         <Tools />
         <ServicesPreview />
         <Testimonials />
+        <PortfolioSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
