@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Moliga';
+  src: url('/fonts/moliga/Moliga-Demo.woff2') format('woff2'),
+       url('/fonts/moliga/Moliga-Demo.otf') format('opentype');
+  font-weight: bold;
+  font-style: bold;
+  font-display: swap;
+}

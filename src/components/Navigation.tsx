@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo.png';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,51 +18,78 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
-  ];
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'my-story', path: '/my-story' },
+  { name: 'Contact', path: '#contact', isAnchor: true },
+];
+
 
   const isActivePath = (path: string) => location.pathname === path;
 
   return (
-    <nav
+   <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-card/80 backdrop-blur-lg border-b border-border' : 'bg-transparent'
+        isScrolled
+          ? 'bg-white/40 backdrop-blur-xl border-b border-white/20 shadow-[0_8px_32px_rgba(31,38,135,0.1)]'
+          : 'bg-transparent'
       }`}
-    >
+   >
+
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-2xl font-bold">
-            <span className="text-foreground">Email</span>
-            <span className="text-primary text-glow-cyan">Pro</span>
-          </Link>
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center">
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative text-sm font-medium transition-colors hover:text-primary ${
-                  isActivePath(link.path)
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
-                }`}
-              >
-                {link.name}
-                {isActivePath(link.path) && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary glow-cyan" />
-                )}
-              </Link>
-            ))}
+          {navLinks.map((link) =>
+  link.isAnchor ? (
+    <a
+      key={link.name}
+      href="/#contact"
+      onClick={(e) => {
+        // If already on homepage, smooth scroll instead of reloading
+        if (location.pathname === "/") {
+          e.preventDefault();
+          document.getElementById("contact")?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }}
+      className="relative text-sm font-medium transition-colors hover:text-primary text-background/70"
+    >
+      Contact
+    </a>
+  ) : (
+    <Link
+      key={link.path}
+      to={link.path}
+      className={`relative text-sm font-medium transition-colors hover:text-primary ${
+        isActivePath(link.path)
+          ? "text-primary"
+          : "text-background/70"
+      }`}
+    >
+      {link.name}
+      {isActivePath(link.path) && (
+        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary glow-cyan" />
+      )}
+    </Link>
+  )
+)}
+
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground"
+            className="md:hidden text-background"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -79,7 +107,7 @@ const Navigation = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium montserrat transition-colors hover:text-primary ${
                   isActivePath(link.path)
                     ? 'text-primary'
                     : 'text-muted-foreground'

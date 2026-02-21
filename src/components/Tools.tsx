@@ -1,38 +1,36 @@
-import { Figma, Palette, Mail, Workflow, Database, BarChart } from 'lucide-react';
+import figma from "@/assets/EM logos/figma.png";
+import canva from "@/assets/EM logos/canva.png";
+import mailchimp from "@/assets/EM logos/mailchimp.png";
+import klaviyo from "@/assets/EM logos/klaviyo.png";
+import befree from "@/assets/EM logos/befree.png";
+import hubspot from "@/assets/EM logos/hubspot.png";  
+import activecampaign from "@/assets/EM logos/activecampaign.png";  
+import constantcontact from "@/assets/EM logos/constantcontact.png";
+import mailerlite from "@/assets/EM logos/mailerlite.png";
+import servicetitan from "@/assets/EM logos/servicetitan.png";
+import zoho from "@/assets/EM logos/zoho.png";
 
 const Tools = () => {
-  const tools = [
-    { name: 'Figma', icon: Figma },
-    { name: 'Canva', icon: Palette },
-    { name: 'Mailchimp', icon: Mail },
-    { name: 'Klaviyo', icon: Workflow },
-    { name: 'BeFree', icon: Database },
-    { name: 'HubSpot', icon: BarChart },
+  const logos = [
+    figma, canva, mailchimp, klaviyo, befree, hubspot,
+    activecampaign, constantcontact, mailerlite, servicetitan, zoho
   ];
 
   return (
-    <section className="py-20 relative bg-card/20">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Tools I <span className="text-primary text-glow-cyan">Master</span>
+    <section className="py-5 relative bg-background overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center animate-fade-in">
+          <h2 className="text-1xl md:text-2xl font-bold mb-2 text-primary/40">
+            My Tech{' '}
+            <span className="text-primary/50">Stack</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Leveraging industry-leading platforms to deliver exceptional email marketing results
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {tools.map((tool, index) => (
-            <div
-              key={tool.name}
-              className="group flex flex-col items-center gap-4 p-6 bg-card/50 backdrop-blur-sm rounded-xl border neon-border-cyan hover:glow-cyan transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <tool.icon className="w-8 h-8 text-primary" />
-              </div>
-              <span className="text-sm font-medium text-center">{tool.name}</span>
+      </div>
+      {/* SEAMLESS INFINITE MARQUEE */}
+      <div className="marquee-container">
+        <div className="marquee-track">
+          {/* Duplicate logos once for seamless scroll */}
+          {[...logos, ...logos].map((logo, i) => (
+            <div key={i} className="marquee-item">
+              <img src={logo} alt="logo" className="h-12 w-auto object-contain" />
             </div>
           ))}
         </div>

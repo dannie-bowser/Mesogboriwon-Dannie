@@ -1,128 +1,121 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Send, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
   };
 
   return (
-    <section id="contact" className="py-20">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            Let's Work <span className="text-secondary text-glow-magenta">Together</span>
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Ready to elevate your email marketing? Get in touch and let's create something amazing.
-          </p>
-        </div>
+    <section id="contact" className="py-20 bg-background">
+      <div className="container mx-auto px-6 max-w-5xl">
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <div className="space-y-8 animate-fade-in">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Input
-                    placeholder="Your Name"
-                    className="bg-card/50 border-primary/30 focus:border-primary focus:glow-cyan"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="email"
-                    placeholder="Your Email"
-                    className="bg-card/50 border-primary/30 focus:border-primary focus:glow-cyan"
-                  />
-                </div>
-                <div>
-                  <Input
-                    placeholder="Subject"
-                    className="bg-card/50 border-primary/30 focus:border-primary focus:glow-cyan"
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    placeholder="Your Message"
-                    rows={6}
-                    className="bg-card/50 border-primary/30 focus:border-primary focus:glow-cyan resize-none"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </div>
+        {/* 2-COLUMN LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+
+          {/* LEFT — TITLE */}
+          <div className="animate-fade-in space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              Let's Get Things <br />
+              <span className="text-secondary text-glow-magenta">Done</span>
+            </h2>
           </div>
 
-          <div className="space-y-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4 p-4 bg-card/50 rounded-lg border neon-border-cyan">
-                  <Mail className="w-6 h-6 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Email</h4>
-                    <a
-                      href="mailto:hello@emailexpert.com"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      hello@emailexpert.com
-                    </a>
-                  </div>
-                </div>
+          {/* RIGHT — DESCRIPTION + BUTTON + SOCIAL ICONS */}
+          <div className="animate-fade-in space-y-10">
 
-                <div className="flex items-start gap-4 p-4 bg-card/50 rounded-lg border neon-border-cyan">
-                  <Phone className="w-6 h-6 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Phone</h4>
-                    <a
-                      href="tel:+1234567890"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      +1 (234) 567-890
-                    </a>
-                  </div>
-                </div>
+            <p className="text-base md:text-lg text-white leading-relaxed">
+               Whether you need a complete email marketing overhaul or just want to optimize your current campaigns, I'm here to help.
+            </p>
 
-                <div className="flex items-start gap-4 p-4 bg-card/50 rounded-lg border neon-border-cyan">
-                  <MapPin className="w-6 h-6 text-primary mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Location</h4>
-                    <p className="text-muted-foreground">
-                      San Francisco, CA
-                    </p>
-                  </div>
-                </div>
+            {/* Button + Social Icons Row */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+
+              {/* Message Me Button & Dialog */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    size="lg"
+                    className="flex items-center gap-3 bg-primary hover:bg-primary/90 
+                    text-primary-foreground glow-cyan text-lg py-6 px-10 rounded-2xl"
+                  >
+                    <Send className="w-6 h-6" />
+                    Message Me
+                  </Button>
+                </DialogTrigger>
+
+                <DialogContent className="bg-card/40 backdrop-blur-xl 
+                  border border-primary/30 shadow-xl rounded-2xl max-w-lg">
+
+                  <DialogHeader>
+                    <DialogTitle className="text-3xl font-bold text-center">
+                      Send Me a Message
+                    </DialogTitle>
+                  </DialogHeader>
+
+                  <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+                    <Input
+                      placeholder="Your Name"
+                      className="bg-card/60 border-primary/30 focus:border-primary focus:glow-cyan"
+                    />
+
+                    <Input
+                      type="email"
+                      placeholder="Your Email"
+                      className="bg-card/60 border-primary/30 focus:border-primary focus:glow-cyan"
+                    />
+
+                    <Input
+                      placeholder="Subject"
+                      className="bg-card/60 border-primary/30 focus:border-primary focus:glow-cyan"
+                    />
+
+                    <Textarea
+                      placeholder="Your Message"
+                      rows={5}
+                      className="bg-card/60 border-primary/30 focus:border-primary focus:glow-cyan resize-none"
+                    />
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-secondary hover:bg-primary/90 text-primary-foreground glow-cyan rounded-xl"
+                    >
+                      Send Message
+                    </Button>
+                  </form>
+
+                </DialogContent>
+              </Dialog>
+
+              {/* SOCIAL ICONS */}
+               <div className="flex gap-3 sm:gap-4 mt-0 sm:mt-4 text-background text-lg sm:text-xl">
+                <a href="https://web.facebook.com/mesogboriwon.daniel" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-purple-400 transition text-secondary">
+                  <Facebook className="w-5 sm:w-6 h-5 sm:h-6 " />
+                </a>
+                <a href="https://x.com/kae_dahn" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition text-secondary">
+                  <Twitter className="w-5 sm:w-6 h-5 sm:h-6" />
+                </a>
+                <a href="https://www.linkedin.com/in/mesogboriwon-daniel" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-purple-400 transition text-secondary">
+                  <Linkedin className="w-5 sm:w-6 h-5 sm:h-6" />
+                </a>
+                <a href="https://wa.me/2348145139582" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="hover:text-purple-400 transition text-secondary">
+                  <MessageCircle className="w-5 sm:w-6 h-5 sm:h-6" />
+                </a>
               </div>
+
             </div>
 
-            <div className="p-6 bg-card/50 rounded-lg border neon-border-magenta">
-              <h4 className="font-semibold mb-4">Business Hours</h4>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>9:00 AM - 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>10:00 AM - 4:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span>Closed</span>
-                </div>
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
     </section>

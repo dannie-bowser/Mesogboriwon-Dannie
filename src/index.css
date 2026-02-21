@@ -1,62 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
 
 @layer base {
-  :root {
-    --background: 240 8% 4%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 6% 8%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 6% 8%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 189 100% 50%;
-    --primary-foreground: 240 8% 4%;
-
-    --secondary: 330 100% 50%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 5% 15%;
-    --muted-foreground: 0 0% 60%;
-
-    --accent: 142 100% 50%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5% 15%;
-    --input: 240 5% 15%;
-    --ring: 189 100% 50%;
-
-    --radius: 0.75rem;
-
-    /* Neon glow colors */
-    --neon-cyan: 189 100% 50%;
-    --neon-magenta: 330 100% 50%;
-    --neon-green: 142 100% 50%;
-    
-    /* Gradients */
-    --gradient-dark: linear-gradient(135deg, hsl(240 8% 4%), hsl(240 6% 6%));
-    --gradient-card: linear-gradient(135deg, hsl(240 6% 8% / 0.5), hsl(240 6% 10% / 0.5));
-    
-    /* Shadows with glow */
-    --shadow-glow-cyan: 0 0 20px hsl(var(--neon-cyan) / 0.3), 0 0 40px hsl(var(--neon-cyan) / 0.1);
-    --shadow-glow-magenta: 0 0 20px hsl(var(--neon-magenta) / 0.3), 0 0 40px hsl(var(--neon-magenta) / 0.1);
-    --shadow-glow-green: 0 0 20px hsl(var(--neon-green) / 0.3), 0 0 40px hsl(var(--neon-green) / 0.1);
-    
-    /* Transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-glow: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  html, body {
+    overflow-x: hidden;
   }
+
+  :root {
+  /* Background + text */
+  --background: 291 53% 10%; /* #210b2c */
+  --foreground: 0 0% 98%;
+
+  /* Main brand accent (Lavender) */
+  --primary: 274 63% 75%; /* #bc96e6 */
+  --primary-foreground: 0 0% 10%;
+
+  /* Gold highlight */
+  --secondary: 45 100% 72%; /* #ffd166 */
+  --secondary-foreground: 0 0% 10%;
+
+  /* Accent (same as primary for consistency) */
+  --accent: 274 63% 75%;
+  --accent-foreground: 0 0% 10%;
+
+  /* Muted / Cards */
+  --muted: 291 20% 20%;
+  --muted-foreground: 291 25% 85%;
+  --card: 291 30% 15%;
+  --card-foreground: 0 0% 98%;
+
+  /* Borders */
+  --border: 291 20% 25%;
+  --input: 291 20% 25%;
+  --ring: 274 63% 75%;
+
+  --radius: 0.5rem;
 }
+
+  }
+
 
 @layer base {
   * {
@@ -64,8 +53,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background: linear-gradient(135deg, hsl(240 8% 4%), hsl(240 6% 6%));
+    @apply bg-white text-foreground font-sans antialiased;
   }
   
   html {
@@ -73,32 +61,119 @@ All colors MUST be HSL.
   }
 }
 
-@layer utilities {
-  .glow-cyan {
-    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.3), 0 0 40px hsl(var(--neon-cyan) / 0.1);
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2rem;          /* spacing between logos */
+  animation: marquee 20s linear infinite; /* control speed here */
+  width: fit-content;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Smooth seamless scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
   }
-  
-  .glow-magenta {
-    box-shadow: 0 0 20px hsl(var(--neon-magenta) / 0.3), 0 0 40px hsl(var(--neon-magenta) / 0.1);
+  100% {
+    transform: translateX(-50%); /* shift left by first set of logos */
   }
-  
-  .glow-green {
-    box-shadow: 0 0 20px hsl(var(--neon-green) / 0.3), 0 0 40px hsl(var(--neon-green) / 0.1);
+}
+
+.moliga {
+  font-family: 'Moliga', sans-serif;
+}
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom CSS to hide the scrollbar while allowing scrolling */
+.hide-scrollbar-on-mobile {
+  /* For Internet Explorer and Edge */
+  -ms-overflow-style: none;
+  /* For Firefox */
+  scrollbar-width: none;
+}
+
+/* For Chrome, Safari, and Opera */
+.hide-scrollbar-on-mobile::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure this only applies below the lg breakpoint (1024px) */
+@media (min-width: 1024px) {
+    .hide-scrollbar-on-mobile {
+        /* Restore scrollbar on desktop */
+        -ms-overflow-style: auto;
+        scrollbar-width: auto;
+    }
+    .hide-scrollbar-on-mobile::-webkit-scrollbar {
+        display: block;
+    }
+}
+
+/* ==============================================
+   CUSTOM 1120PX BREAKPOINT CLASSES
+   ============================================== */
+
+/* Container: Switch to Grid layout, 4 columns, and restore default overflow */
+@media (min-width: 1120px) {
+  .lg-1120-grid {
+    display: grid !important; /* Forces the flex to switch to grid */
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important; 
+    /* The 'gap-8' class will still apply automatically */
+    overflow-x: visible !important; /* Allow the grid content to be fully visible */
   }
-  
-  .neon-border-cyan {
-    border: 1px solid hsl(var(--neon-cyan) / 0.5);
+}
+
+/* Individual Card: Ensure card takes up full column width within the grid */
+@media (min-width: 1120px) {
+  .lg-1120-w-full {
+    width: 100% !important; 
   }
-  
-  .neon-border-magenta {
-    border: 1px solid hsl(var(--neon-magenta) / 0.5);
+  .lg-1120-shrink {
+    flex-shrink: 1 !important; /* Allow card to shrink/grow in grid */
   }
-  
-  .text-glow-cyan {
-    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5);
+}
+
+/* Indicator Dots: Hide the dots when the 1120px grid is active */
+@media (min-width: 1120px) {
+  .lg-1120-hidden {
+    display: none !important;
   }
-  
-  .text-glow-magenta {
-    text-shadow: 0 0 10px hsl(var(--neon-magenta) / 0.5);
-  }
+}
+
+/* ==============================================
+   SCROLLBAR HIDING (If not already in your config)
+   ============================================== */
+/* This ensures the horizontal scrollbar remains hidden below 1120px */
+.hide-scrollbar-on-mobile {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar-on-mobile::-webkit-scrollbar {
+  display: none;
+}
+/* Revert scrollbar behavior at the 1120px desktop view */
+@media (min-width: 1120px) {
+    .hide-scrollbar-on-mobile {
+        -ms-overflow-style: auto;
+        scrollbar-width: auto;
+    }
+    .hide-scrollbar-on-mobile::-webkit-scrollbar {
+        display: block;
+    }
 }

@@ -1,162 +1,55 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
-import { Mail, Linkedin, Twitter, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import { ArrowLeft } from 'lucide-react';
 
 const Contact = () => {
-  const { toast } = useToast();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-  };
-
   return (
     <div className="min-h-screen relative">
       <ParticleBackground />
       <Navigation />
       
-      <main className="relative z-10">
-        {/* Hero Section */}
-        <section className="pt-32 pb-20">
-          <div className="container mx-auto px-6">
-            <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Let's <span className="text-primary text-glow-cyan">Connect</span>
+      <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-200px)]">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            {/* 404 Number */}
+            <div className="space-y-4">
+              <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold text-secondary/20">
+                404
               </h1>
-              <p className="text-xl text-muted-foreground">
-                Ready to transform your email marketing? Get in touch and let's discuss your goals.
-              </p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-background">
+                Page Under <span className="text-secondary text-glow-cyan">Construction</span>
+              </h2>
             </div>
-          </div>
-        </section>
 
-        {/* Contact Form & Info */}
-        <section className="pb-20">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-              {/* Contact Form */}
-              <div className="animate-fade-in-left">
-                <form onSubmit={handleSubmit} className="space-y-6 p-8 bg-card/50 backdrop-blur-sm rounded-xl border neon-border-cyan">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Your Name
-                    </label>
-                    <Input
-                      id="name"
-                      placeholder="John Doe"
-                      required
-                      className="bg-background/50 border-border focus:neon-border-cyan"
-                    />
-                  </div>
+            {/* Description */}
+            <p className="text-base sm:text-lg md:text-xl text-black/70 leading-relaxed">
+              This page is being customized with beautiful images and content. 
+              In the meantime, you can reach out using the contact form in the footer of any page or scroll to the contact section on the homepage.
+            </p>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email Address
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      required
-                      className="bg-background/50 border-border focus:neon-border-cyan"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      placeholder="Project Inquiry"
-                      required
-                      className="bg-background/50 border-border focus:neon-border-cyan"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell me about your project..."
-                      rows={6}
-                      required
-                      className="bg-background/50 border-border focus:neon-border-cyan resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan"
-                  >
-                    Send Message
-                  </Button>
-                </form>
-              </div>
-
-              {/* Contact Info */}
-              <div className="space-y-8 animate-fade-in-right">
-                <div className="p-8 bg-card/50 backdrop-blur-sm rounded-xl border neon-border-magenta">
-                  <MessageSquare className="w-12 h-12 text-secondary mb-4" />
-                  <h3 className="text-2xl font-semibold mb-4">Get in Touch</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Whether you need a complete email marketing overhaul or just want to optimize your current campaigns, I'm here to help.
-                  </p>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="font-medium mb-1">Email</div>
-                      <a href="mailto:hello@example.com" className="text-primary hover:text-primary/80 transition-colors">
-                        hello@example.com
-                      </a>
-                    </div>
-                    <div>
-                      <div className="font-medium mb-1">Response Time</div>
-                      <p className="text-muted-foreground">Within 24 hours</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 bg-card/50 backdrop-blur-sm rounded-xl border neon-border-cyan">
-                  <h3 className="text-2xl font-semibold mb-4">Connect on Social</h3>
-                  <div className="space-y-4">
-                    <a
-                      href="#"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors group"
-                    >
-                      <Linkedin className="w-5 h-5 text-primary" />
-                      <span className="group-hover:text-primary transition-colors">LinkedIn</span>
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors group"
-                    >
-                      <Twitter className="w-5 h-5 text-primary" />
-                      <span className="group-hover:text-primary transition-colors">Twitter</span>
-                    </a>
-                    <a
-                      href="mailto:hello@example.com"
-                      className="flex items-center gap-3 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors group"
-                    >
-                      <Mail className="w-5 h-5 text-primary" />
-                      <span className="group-hover:text-primary transition-colors">Email</span>
-                    </a>
-                  </div>
-                </div>
+            {/* Placeholder for Image */}
+            <div className="my-12">
+              <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl border-2 border-dashed border-primary/30 flex items-center justify-center">
+                <p className="text-black/50 text-center px-4">
+                  📸 Custom image coming soon
+                </p>
               </div>
             </div>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Link to="/">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                  <ArrowLeft className="mr-2 w-5 h-5" />
+                  Back to Home
+                </Button>
+              </Link>
+            </div>
           </div>
-        </section>
+        </div>
       </main>
 
       <Footer />

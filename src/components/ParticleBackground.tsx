@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -6,8 +6,7 @@ const ParticleBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const setCanvasSize = () => {
@@ -16,32 +15,45 @@ const ParticleBackground = () => {
     };
     setCanvasSize();
 
-    const particles: Particle[] = [];
-    const particleCount = 50;
+    // ✅ Get Tailwind "secondary" color from CSS variable
+    const rawSecondary = getComputedStyle(document.documentElement)
+      .getPropertyValue("--secondary")
+      .trim();
+
+    const secondaryColor = `rgb(${rawSecondary})`; // canvas-compatible
 
     class Particle {
       x: number;
       y: number;
-      size: number;
       speedX: number;
       speedY: number;
-      color: string;
       opacity: number;
+      size: number;
+      type: "dot" | "line";
+      length: number;
+      color: string;
 
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        
-        const colors = [
-          'rgba(0, 240, 255, 0.6)',  // cyan
-          'rgba(255, 0, 110, 0.6)',  // magenta
-          'rgba(0, 136, 255, 0.6)',  // blue
-        ];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.opacity = Math.random() * 0.5 + 0.2;
+
+        this.type = Math.random() < 0.7 ? "dot" : "line";
+
+        this.size = Math.random() * 1.4 + 0.4;
+        this.length = Math.random() * 12 + 6;
+
+        if (this.type === "dot") {
+          this.speedX = Math.random() * 0.4 - 0.2;
+          this.speedY = Math.random() * 0.4 - 0.2;
+        } else {
+          this.speedX = Math.random() * 1.2 - 0.6;
+          this.speedY = Math.random() * 1.2 - 0.6;
+        }
+
+        this.opacity = Math.random() * 0.4 + 0.2;
+
+        // ⭐ 20% chance of being secondary-colored
+        this.color = Math.random() < 0.2 ? secondaryColor : "black";
       }
 
       update() {
@@ -55,40 +67,60 @@ const ParticleBackground = () => {
       }
 
       draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
         ctx.globalAlpha = this.opacity;
-        ctx.fill();
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.color;
+
+        if (this.type === "dot") {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(
+            this.x + this.length * this.speedX * 0.7,
+            this.y + this.length * this.speedY * 0.7
+          );
+          ctx.stroke();
+        }
+
         ctx.globalAlpha = 1;
       }
     }
 
+    const particleCount = Math.floor(
+      (canvas.width * canvas.height) / 3500
+    );
+
+    const particles: Particle[] = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       particles.forEach((particle) => {
         particle.update();
         particle.draw();
       });
+
       requestAnimationFrame(animate);
     };
 
     animate();
 
-    window.addEventListener('resize', setCanvasSize);
-    return () => window.removeEventListener('resize', setCanvasSize);
+    window.addEventListener("resize", setCanvasSize);
+    return () => window.removeEventListener("resize", setCanvasSize);
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.4 }}
+      style={{ opacity: 0.45 }}
     />
   );
 };
